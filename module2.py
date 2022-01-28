@@ -1,15 +1,14 @@
 from typing import Dict
+import random
+import string
+a = [{random.choice(string.ascii_lowercase): random.randint(1,100) for y in range(random.randint(3,6))}
+     for x in range(random.randint(2,10))]
 
-a = [{'a': 5, 'b': 7, 'g': 11, 'e': 11},
-     {'a': 3, 'c': 35, 'g': 42},
-     {'a': 2, 'b': 4, 'c': 5, 'g': 75},
-     {'b': 25, 'f': 7, 'g': 17}]
-print(a)
+print("List of Dictionaries: ", a)
 
-print({"a_1": 5, "b_4": 25, "c_2": 35, "g_3": 75, "f": 7, "e": 11})
-
-# maxValues - will store all keys, max(values) from a
-# maxValuesIndex - will store all keys and index of max(values) dictionary from a
+# maxValues - store all keys, max(values) from a
+# maxValuesIndex - store all keys and index of max(values) dictionary from a
+# countKeys - store TRUE is key exist in more than one dictionary
 maxValues: dict[str, int] = {}
 maxValuesIndex: dict[str, int] = {}
 countKeys: dict[str, bool] = {}
@@ -41,4 +40,4 @@ for k in maxValues.keys():
     else:
         key = k
     aggDict.update({key: maxValues.get(k)})
-print("Combine dictionary: ", aggDict)
+print("Combined Dictionary: ", aggDict)
