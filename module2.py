@@ -1,7 +1,7 @@
 from typing import Dict
 import random
 import string
-a = [{random.choice(string.ascii_lowercase): random.randint(1,100) for y in range(random.randint(3,6))}
+a = [{random.choice(string.ascii_lowercase): random.randint(1,100) for y in range(random.randint(2,26))}
      for x in range(random.randint(2,10))]
 
 print("List of Dictionaries: ", a)
@@ -12,6 +12,7 @@ print("List of Dictionaries: ", a)
 maxValues: dict[str, int] = {}
 maxValuesIndex: dict[str, int] = {}
 countKeys: dict[str, bool] = {}
+
 
 # Go thought all dict in list a
 for i in range(0, len(a)):
