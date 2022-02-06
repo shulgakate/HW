@@ -1,7 +1,8 @@
 import random
 import string
+import re
 
-a: string = '''homEwork:
+inputText: string = '''homEwork:
 
 tHis iz your homeWork, copy these Text to variable.
 
@@ -15,15 +16,38 @@ it iZ misspeLLing here. fix“iZ” with correct “is”, but ONLY when it Iz a
 
 
 
-last iz TO calculate nuMber OF Whitespace characteRS in this Tex. caREFULL, not only Spaces, but ALL whitespaces. I got 87.'''
-
-# Normalize. TODO
-print(a.split('\n'))
+last iz TO calculate nuMber OF Whitespace characteRS in this Text. caREFULL, not only Spaces, but ALL whitespaces. I got 87.'''
 
 # Replace iz with is
-print(a.lower().replace(' iz ', ' is '))
+inputText = inputText.lower().replace(' iz ', ' is ')
 
-# Calculate Spaces and whitespaces
-print("Number of spaces:", len(a) - len(''.join(a.split())))
+# Normalize.
+# Split text into paragraphs
+paragraphs = inputText.lower().splitlines()
+
+# Each paragraphs split into sentences, capitalize each sentence and then join in paragraph again
+i = 0
+while i < len(paragraphs):
+    # remove unnecessary whitespaces
+    if len(paragraphs[i]) == 0:
+        paragraphs.remove(paragraphs[i])
+    else:
+        sentences = [j.capitalize() for j in paragraphs[i].strip().split('. ')]
+        paragraphs[i] = '. '.join(sentences)
+        i += 1
+# join paragraph in text again
+normalizeText = '\n'.join(paragraphs)
 
 # Create one more sentence
+last_words = []
+words = normalizeText.split()
+for i in range(len(words)):
+    if re.findall('[:.]', words[i]):
+        last_words.append(re.sub('[:.]', '', words[i]))
+print('FINAL NORMALIZED TEXT WITH ADDITIONAL SENTENCE:')
+print(normalizeText + '\n' + ' '.join(last_words) + '.')
+
+
+# Calculate Spaces and whitespaces - done
+print('\n' + 'NUMBER OF WHITESPACES:')
+print(len(inputText) - len(''.join(inputText.split())))
