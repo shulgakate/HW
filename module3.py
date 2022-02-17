@@ -2,7 +2,7 @@ import random
 import string
 import re
 
-inputText: string = '''homEwork:
+input_text: string = '''homEwork:
 
 tHis iz your homeWork, copy these Text to variable.
 
@@ -19,11 +19,11 @@ it iZ misspeLLing here. fix“iZ” with correct “is”, but ONLY when it Iz a
 last iz TO calculate nuMber OF Whitespace characteRS in this Text. caREFULL, not only Spaces, but ALL whitespaces. I got 87.'''
 
 # Replace iz with is
-inputText = inputText.lower().replace(' iz ', ' is ')
+input_text = input_text.lower().replace(' iz ', ' is ')
 
 # Normalize.
 # Split text into paragraphs
-paragraphs = inputText.lower().splitlines()
+paragraphs = input_text.lower().splitlines()
 
 # Each paragraphs split into sentences, capitalize each sentence and then join in paragraph again
 i = 0
@@ -36,18 +36,18 @@ while i < len(paragraphs):
         paragraphs[i] = '. '.join(sentences)
         i += 1
 # join paragraph in text again
-normalizeText = '\n'.join(paragraphs)
+normalize_text = '\n'.join(paragraphs)
 
 # Create one more sentence
 last_words = []
-words = normalizeText.split()
+words = normalize_text.split()
 for i in range(len(words)):
     if re.findall('[:.]', words[i]):
         last_words.append(re.sub('[:.]', '', words[i]))
 print('FINAL NORMALIZED TEXT WITH ADDITIONAL SENTENCE:')
-print(normalizeText + '\n' + ' '.join(last_words) + '.')
+print(normalize_text + '\n' + ' '.join(last_words) + '.')
 
 
 # Calculate Spaces and whitespaces - done
 print('\n' + 'NUMBER OF WHITESPACES:')
-print(len(inputText) - len(''.join(inputText.split())))
+print(len(input_text) - len(''.join(input_text.split())))
