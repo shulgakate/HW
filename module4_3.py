@@ -2,7 +2,7 @@ import random
 import string
 import re
 
-inputText: string = '''homEwork:
+input_text: string = '''homEwork:
 
 tHis iz your homeWork, copy these Text to variable.
 
@@ -48,12 +48,12 @@ def add_sentence_with_last_words(text):
 def calculate_whitespaces(text):
     return len(text) - len(''.join(text.split()))
 
-inputText = replace_text(inputText, ' iz ', ' is ')
-normalizeText = normalize_text(inputText)
+input_text = replace_text(input_text, ' iz ', ' is ')
+normalize_text = normalize_text(input_text)
 
 print('FINAL NORMALIZED TEXT WITH ADDITIONAL SENTENCE:')
-print(add_sentence_with_last_words(normalizeText))
+print(add_sentence_with_last_words(normalize_text))
 
 # Calculate Spaces and whitespaces - done
 print('\n' + 'NUMBER OF WHITESPACES:')
-print(calculate_whitespaces(inputText))
+print(calculate_whitespaces(input_text))
