@@ -2,7 +2,8 @@ import random
 import string
 import re
 
-input_text: string = '''homEwork:
+if __name__ == '__main__':
+    input_text: string = '''homEwork:
 
 tHis iz your homeWork, copy these Text to variable.
 
@@ -17,13 +18,16 @@ it iZ misspeLLing here. fix“iZ” with correct “is”, but ONLY when it Iz a
 
 
 last iz TO calculate nuMber OF Whitespace characteRS in this Text. caREFULL, not only Spaces, but ALL whitespaces. I got 87.'''
-
+else:
+    input_text: string = ''
 
 # Replace iz with is
 def replace_text(text, orig = '', rep = ''):
     return text.lower().replace(orig, rep)
 
 def normalize_text(text):
+    if text == '':
+        exit()
     paragraphs = text.lower().splitlines()
     i: int = 0
     while i < len(paragraphs):
@@ -35,7 +39,7 @@ def normalize_text(text):
             paragraphs[i] = '. '.join(sentences)
             i += 1
     # join paragraph in text again
-    return '\n'.join(paragraphs)
+    return '\n'.join(paragraphs).strip()
 
 def add_sentence_with_last_words(text):
     last_words = []
@@ -48,12 +52,13 @@ def add_sentence_with_last_words(text):
 def calculate_whitespaces(text):
     return len(text) - len(''.join(text.split()))
 
-input_text = replace_text(input_text, ' iz ', ' is ')
-normalize_text = normalize_text(input_text)
+def main():
+    input_text = replace_text(input_text, ' iz ', ' is ')
+    normalize_text = normalize_text(input_text)
 
-print('FINAL NORMALIZED TEXT WITH ADDITIONAL SENTENCE:')
-print(add_sentence_with_last_words(normalize_text))
+    print('FINAL NORMALIZED TEXT WITH ADDITIONAL SENTENCE:')
+    print(add_sentence_with_last_words(normalize_text))
 
 # Calculate Spaces and whitespaces - done
-print('\n' + 'NUMBER OF WHITESPACES:')
-print(calculate_whitespaces(input_text))
+    print('\n' + 'NUMBER OF WHITESPACES:')
+    print(calculate_whitespaces(input_text))
