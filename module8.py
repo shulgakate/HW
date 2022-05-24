@@ -1,9 +1,9 @@
 import json
 from module5 import News, Advertising, Recipe, Publication
-from os import path, stat, remove
+from os import remove
 from module6 import PublicationFromFile
 from module4_3 import normalize_text
-import argparse
+from module7 import Analytics
 
 source_file_name = 'LoadNews.json'
 target_file_name = 'Newsfeed.txt'
@@ -62,6 +62,7 @@ def main(source, target):
             elif input_line == '4' or input_line == '5':
                 if input_line == '4':
                     tmp = PublicationFromFile()
+                    source = source.replace('json', 'txt')
                 else:
                     tmp = PublicationFromJSON()
                 tmp.get_source_file(source)
@@ -69,10 +70,12 @@ def main(source, target):
                 tmp.publish()
                 if input('Delete source file Y/N? ').upper() == 'Y':
                     remove(tmp.source_file)
+
             elif input_line.upper() == 'E':
                 break
             elif input_line.upper() not in ('1', '2', '3', '4', '5', 'E'):
                 raise ValueError
+            Analytics(target)
         except ValueError:
             print('Input is incorrect!\n')
         else:

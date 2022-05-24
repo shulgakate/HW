@@ -88,3 +88,18 @@ Private recipe text imported from json
 Amount of calories: 2000, Calories Rate: High
 ------------------------------
 
+News-------------------------
+dfsdfsdf
+Dfsdfsd, 2022-05-24 16:23
+------------------------------
+
+Advertising------------------
+erwerwer
+Actual until: 2023-03-03, 282 days left
+------------------------------
+
+Recipe-----------------------
+ffdfgdfg
+Amount of calories: 23, Calories Rate: Low
+------------------------------
+
