@@ -11,7 +11,6 @@ target_file_name = 'Newsfeed.txt'
 class PublicationFromFile(Publication):
     def __init__(self):
         super().__init__()
-    #    self.source_file = None
         self.validator = True
         self.err_msg = ''
         self.err_path = 'Errors_log.txt'
@@ -98,6 +97,8 @@ def main(source, target):
                 tmp.get_source_file(source)
                 tmp.get_target_file(target)
                 tmp.publish()
+                if input('Delete source file Y/N? ').upper() == 'Y':
+                    remove(tmp.source_file)
             elif input_line.upper() == 'E':
                 break
             elif input_line.upper() not in ('1', '2', '3', '4', 'E'):
@@ -106,7 +107,6 @@ def main(source, target):
             print('Input is incorrect!\n')
         else:
             break
-
 
 if __name__ == '__main__':
     main(source_file_name, target_file_name)

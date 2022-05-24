@@ -37,3 +37,54 @@ New news
 Poltava, 2022-05-24 12:54
 ------------------------------
 
+News-------------------------
+Something happened
+Dffkgkf.  d;fflgdjfgjlksg
+Fdgldkfgj fd.
+Kharkiv, 2022-05-24 13:06
+------------------------------
+
+Recipe-----------------------
+Recipe of cake.
+Take 10 gramms of pour
+Amount of calories: 1000, Calories Rate: High
+------------------------------
+
+Advertising------------------
+New advertising from   file
+Actual until: 2022-10-10, 138 days left
+------------------------------
+
+News-------------------------
+Something happened
+Dffkgkf.  d;fflgdjfgjlksg
+Fdgldkfgj fd.
+Kharkiv, 2022-05-24 13:11
+------------------------------
+
+Recipe-----------------------
+Recipe of cake.
+Take 10 gramms of pour
+Amount of calories: 1000, Calories Rate: High
+------------------------------
+
+Advertising------------------
+New advertising from   file
+Actual until: 2022-10-10, 138 days left
+------------------------------
+
+News-------------------------
+News text imported from json
+Lutch, 2022-05-24 16:18
+------------------------------
+
+Advertising------------------
+Private ad text imported from json
+Actual until: 2023-01-01, 221 days left
+------------------------------
+
+Recipe-----------------------
+Private recipe text imported from json
+Amount of calories: 2000, Calories Rate: High
+------------------------------
+

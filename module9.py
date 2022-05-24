@@ -1,8 +1,3 @@
-from datetime import datetime
+import json
 
-try:
-    date = input("Please enter Advertising expiration date in format yyyy-mm-dd: ")
-    date1 = datetime.strptime(date, '%Y-%m-%d')
-    print(date1)
-except ValueError:
-    print('Value is incorrect')
+print(json.load(open('LoadNews.json', 'r')))

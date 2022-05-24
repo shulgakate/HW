@@ -1,0 +1,13 @@
+[
+{
+    "type": "news",
+    "text": "News text imported from JSON",
+    "city": "Lviv"},
+{
+    "type": "Advertising",
+    "text": "Private ad text imported from JSON",
+    "expiration_date": "2023-01-01"},
+{
+    "type": "recipe",
+    "text": "Private recipe text imported from JSON",
+    "calories": "2000"}]

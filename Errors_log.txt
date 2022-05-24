@@ -14,3 +14,44 @@ Kharkiv
 
 
 
+Publication text or City could is empty: 
+News||
+||
+Kharkiv
+
+
+
+
+Publication text or City could is empty: 
+News||
+||
+Kharkiv
+
+
+
+
+Empty publication: 
+Empty publication: 
+Empty publication: 
+Incorrect publication: {
+"type": "news",
+"text": "news text imported from json",
+"city": "lutch"
+},
+{
+"type": "advertising",
+"text": "private ad text imported from json",
+"expiration_date": "2023-01-01"
+},
+{
+"type": "recipe",
+"text": "private recipe text imported from json",
+"title": "2000",
+}
+Publication text or City could is empty: news
+Publication text or City could is empty: news
+Publication text or City could is empty: news
+Publication text is empty or Date format is incorrect or Date is in the past: Advertising
+Publication text or City could is empty: news
+Publication text is empty or Date format is incorrect or Date is in the past: Advertising
+Publication text or Calories is empty or Calories isnt an integer: recipe
