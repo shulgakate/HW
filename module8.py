@@ -8,6 +8,7 @@ from module7 import Analytics
 source_file_name = 'LoadNews.json'
 target_file_name = 'Newsfeed.txt'
 
+
 class PublicationFromJSON(PublicationFromFile):
     def __init__(self):
         super().__init__()

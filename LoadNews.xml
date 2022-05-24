@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<root>
+  <publication type='news'>
+    <text>News text imported from XML</text>
+    <city>Solonka</city>
+  </publication>
+  <publication type='Advertising'>
+    <text>Private ad text imported from XML</text>
+    <expiration_date>2043-12-31</expiration_date>
+  </publication>
+  <publication type='recipe'>
+    <text>Recipe imported from XML</text>
+    <calories>99</calories>
+  </publication>
+</root>
