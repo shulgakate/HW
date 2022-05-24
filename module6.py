@@ -3,31 +3,28 @@ from module4_3 import normalize_text
 from os import path, stat, remove
 from re import findall, sub
 from datetime import datetime, date, timedelta
-import argparse
+
+source_file_name = 'LoadNews.txt'
+target_file_name = 'Newsfeed.txt'
 
 
-class PublicationFromFile:
-    def __init__(self, from_file='LoadNews.txt', file_name='Newsfeed.txt'):
-        self.from_file = from_file
-        self.file_name = file_name
+class PublicationFromFile(Publication):
+    def __init__(self):
+        super().__init__()
+    #    self.source_file = None
         self.validator = True
         self.err_msg = ''
-        self.err_path = 'Errors_' + self.file_name
+        self.err_path = 'Errors_log.txt'
         self.record = 1
         self.unpublished = 0
-        #self.publish(from_file, file_name)
 
     def write_error(self, error_type, publication):
         with open(self.err_path, 'a') as file:
             file.write(error_type + ': ' + publication + '\n')
 
-    def publish(self, from_file, file_name):
-        if self.from_file is None:
-            print('File for reading was not specified')
-        else:
-            with open(self.from_file, 'r') as file:
-                 publications = file.read().split('@@')
-            #publications = publications
+    def publish(self):
+        with open(self.source_file, 'r') as file:
+            publications = file.read().split('@@')
         i = 0
         j = 0
         while i < len(publications):
@@ -35,55 +32,83 @@ class PublicationFromFile:
                 publication = publications[i].split('||')
                 publication_type = normalize_text(publication[0])
                 if publication_type == 'News':
-                    tmp = News()
+                    tmp = News(self.target_file)
                 elif publication_type == 'Advertising':
-                    tmp = Advertising()
+                    tmp = Advertising(self.target_file)
                 elif publication_type == 'Recipe':
-                    tmp = Recipe()
+                    tmp = Recipe(self.target_file)
                 else:
                     self.write_error('Incorrect publication', publication_type)
+                    self.unpublished += 1
                     break
-                body = normalize_text(publication[1])
-                additional_info = normalize_text(publication[2])
-                tmp.prepare_publication(body, additional_info)
-                tmp.write_to_file()
-                self.unpublished += 1
+                tmp.publication_text = normalize_text(publication[1])
+                tmp.prepare_publication(normalize_text(publication[2]))
+                if tmp.error is not None:
+                    self.write_error(tmp.error, publications[i])
+                    self.unpublished += 1
+                else:
+                    tmp.write_to_file()
             else:
+                self.unpublished += 1
                 self.write_error('Empty publication', publications[i])
             i += 1
-        print(str(self.unpublished) + ' of ' + str(i) + ' publications were successfully upload from file')
+        print(str(len(publications) - self.unpublished) + ' of '
+              + str(len(publications)) + ' publications were successfully upload from file')
 
-
-def main(from_file=None, file_name='Newsfeed.txt'):
-    while True:
+    def get_source_file(self, file_name):
         try:
-            input_line = input("Please enter 1 for News, 2 for Advertisement, 3 for Recipe, 4 for upload from file and E for exit: ")
-            if input_line == '1' or input_line == '2' or input_line == '3':
-                if input_line == '1':
-                    tmp = News()
-                elif input_line == '2':
-                    tmp = Advertising()
-                elif input_line == '3':
-                    tmp = Recipe()
-                tmp.get_additional_info()
-                tmp.write_to_file()
-                print(f"{tmp.__class__.__name__} was successfully added to the file")
-            elif input_line == '4':
-                if from_file is None:
-                    print('File not found. Use -s or --source argument to specify path')
+            confirmation = input('Is source file for upload ' + file_name + ':'
+                                 " Y - yes, "
+                                 " N - for type new file path"
+                                 " E - for exit: \n")
+            if confirmation.upper() == 'E':
+                exit()
+            elif confirmation.upper() == 'N':
+                file_name = input('Please enter the path to the new source file: ')
+                if file_name == '':
+                    print('File name is empty')
                     exit()
-                else:
-                    print('------------Uploading------------')
-                    PublicationFromFile().publish(from_file, file_name)
-            elif input_line == 'e':
-                break
-            elif input_line not in ('1', '2', '3', '4', 'e'):
+            elif confirmation.upper() == 'Y':
+                print('')
+            else:
                 raise ValueError
         except ValueError:
             print('Input is incorrect!')
+        try:
+            file = open(file_name, 'r')
+            self.source_file = file_name
+        except FileNotFoundError:
+            print('File is not found')
+            exit()
+
+
+def main(source, target):
+    while True:
+        try:
+            input_line = input("Please enter:"
+                               " 1 for News, "
+                               " 2 for Advertisement,"
+                               " 3 for Recipe,"
+                               " 4 for upload from file"
+                               " and E for exit: \n")
+            if input_line == '1' or input_line == '2' or input_line == '3':
+                Publication().add_publication(input_line, target)
+            elif input_line == '4':
+                tmp = PublicationFromFile()
+                tmp.get_source_file(source)
+                tmp.get_target_file(target)
+                tmp.publish()
+            elif input_line.upper() == 'E':
+                break
+            elif input_line.upper() not in ('1', '2', '3', '4', 'E'):
+                raise ValueError
+        except ValueError:
+            print('Input is incorrect!\n')
         else:
             break
 
-main('LoadNews.txt')
+
+if __name__ == '__main__':
+    main(source_file_name, target_file_name)
 
 

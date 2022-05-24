@@ -2,7 +2,7 @@ import csv
 from re import sub, compile
 from string import ascii_uppercase
 from module6 import PublicationFromFile
-#import module6
+
 
 class Analytics:
     def __init__(self, file_name):
@@ -35,7 +35,7 @@ class Analytics:
         letter_dictionary = dict()
         upper_letters = []
         letters = compile('[^a-zA-Z]').sub('', self.text)
-        print(len(letters))
+
         for i in letters:
             if i.lower() in letter_dictionary:
                 letter_dictionary[i.lower()] += 1
@@ -51,13 +51,14 @@ class Analytics:
             for k, v in letter_dictionary.items():
                 percentage = round(int(v) / len(letters) * 100, 2)
                 writer.writerow({'letter': k, 'count_all': v,
-                                     'count_uppercase': upper_letters.count(k),
-                                     'percentage': percentage})
+                                 'count_uppercase': upper_letters.count(k),
+                                 'percentage': percentage})
 
 
 def main(file_name='Newsfeed.txt'):
     PublicationFromFile()
     Analytics(file_name)
+
 
 if __name__ == '__main__':
     main()

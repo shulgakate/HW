@@ -1,0 +1,16 @@
+Publication text or City could not be empty: News||
+||
+Kharkiv
+
+Publication text or City could not be empty: News||
+||
+Kharkiv
+
+Publication text or City could is empty: 
+News||
+||
+Kharkiv
+
+
+
+
