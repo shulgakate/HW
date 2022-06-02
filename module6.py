@@ -24,35 +24,36 @@ class PublicationFromFile(Publication):
     def publish(self):
         with open(self.source_file, 'r') as file:
             publications = file.read().split('@@')
-        i = 0
-        j = 0
-        while i < len(publications):
-            if publications[i] != '':
-                publication = publications[i].split('||')
-                publication_type = normalize_text(publication[0])
-                if publication_type == 'News':
-                    tmp = News(self.target_file)
-                elif publication_type == 'Advertising':
-                    tmp = Advertising(self.target_file)
-                elif publication_type == 'Recipe':
-                    tmp = Recipe(self.target_file)
+            i = 0
+            j = 0
+            while i < len(publications):
+                if publications[i] != '':
+                    publication = publications[i].split('||')
+                    publication_type = normalize_text(publication[0])
+                    if publication_type == 'News':
+                        tmp = News(self.target_file)
+                    elif publication_type == 'Advertising':
+                        tmp = Advertising(self.target_file)
+                    elif publication_type == 'Recipe':
+                        tmp = Recipe(self.target_file)
+                    else:
+                        self.write_error('Incorrect publication', publication_type)
+                        self.unpublished += 1
+                        break
+                    tmp.publication_text = normalize_text(publication[1])
+                    tmp.prepare_publication(normalize_text(publication[2]))
+                    if tmp.error is not None:
+                        self.write_error(tmp.error, publications[i])
+                        self.unpublished += 1
+                    else:
+                        tmp.write_to_file()
+                        tmp.write_to_db()
                 else:
-                    self.write_error('Incorrect publication', publication_type)
                     self.unpublished += 1
-                    break
-                tmp.publication_text = normalize_text(publication[1])
-                tmp.prepare_publication(normalize_text(publication[2]))
-                if tmp.error is not None:
-                    self.write_error(tmp.error, publications[i])
-                    self.unpublished += 1
-                else:
-                    tmp.write_to_file()
-            else:
-                self.unpublished += 1
-                self.write_error('Empty publication', publications[i])
-            i += 1
-        print(str(len(publications) - self.unpublished) + ' of '
-              + str(len(publications)) + ' publications were successfully upload from file')
+                    self.write_error('Empty publication', publications[i])
+                i += 1
+            print(str(len(publications) - self.unpublished) + ' of '
+                  + str(len(publications)) + ' publications were successfully upload from file')
 
     def get_source_file(self, file_name):
         try:
@@ -91,7 +92,13 @@ def main(source, target):
                                " 4 for upload from file"
                                " and E for exit: \n")
             if input_line == '1' or input_line == '2' or input_line == '3':
-                Publication().add_publication(input_line, target)
+                if input_line == '1':
+                    tmp = News()
+                elif input_line == '2':
+                    tmp = Advertising()
+                else:
+                    tmp = Recipe()
+                tmp.add_publication(input_line, target)
             elif input_line == '4':
                 tmp = PublicationFromFile()
                 tmp.get_source_file(source)

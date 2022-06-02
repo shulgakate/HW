@@ -56,3 +56,4 @@ Publication text or City could is empty: news
 Publication text is empty or Date format is incorrect or Date is in the past: Advertising
 Publication text or Calories is empty or Calories isnt an integer: recipe
 Empty publication: 
+Empty publication: 

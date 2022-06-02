@@ -10,6 +10,7 @@ from module7 import Analytics
 source_file_name = 'LoadNews.xml'
 target_file_name = 'Newsfeed.txt'
 
+
 class PublicationFromXML(PublicationFromFile):
     def __init__(self):
         super().__init__()
@@ -41,11 +42,10 @@ class PublicationFromXML(PublicationFromFile):
                         self.unpublished += 1
                     else:
                         tmp.write_to_file()
+                        tmp.write_to_db()
                 else:
                     self.unpublished += 1
                     self.write_error('Empty publication', i.attrib['type'])
-            #print(str(len(publications) - self.unpublished) + ' of '
-             #     + str(len(publications)) + ' publications were successfully upload from file')
         except AttributeError:
             self.write_error('Incorrect Key value')
 
@@ -61,7 +61,13 @@ def main(source, target):
                                    " 6 for upload from XML,"
                                    " and E for exit: \n")
             if input_line == '1' or input_line == '2' or input_line == '3':
-                Publication().add_publication(input_line, target)
+                if input_line == '1':
+                    tmp = News()
+                elif input_line == '2':
+                    tmp = Advertising()
+                else:
+                    tmp = Recipe()
+                tmp.add_publication(input_line, target)
             elif input_line == '4' or input_line == '5' or input_line == '6':
                 if input_line == '4':
                     tmp = PublicationFromFile()

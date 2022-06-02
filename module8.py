@@ -40,6 +40,7 @@ class PublicationFromJSON(PublicationFromFile):
                         self.unpublished += 1
                     else:
                         tmp.write_to_file()
+                        tmp.write_to_db()
                 else:
                     self.unpublished += 1
                     self.write_error('Empty publication', i['type'])
@@ -59,7 +60,13 @@ def main(source, target):
                                    " 5 for upload from JSON, "
                                    " and E for exit: \n")
             if input_line == '1' or input_line == '2' or input_line == '3':
-                Publication().add_publication(input_line, target)
+                if input_line == '1':
+                    tmp = News()
+                elif input_line == '2':
+                    tmp = Advertising()
+                else:
+                    tmp = Recipe()
+                tmp.add_publication(input_line, target)
             elif input_line == '4' or input_line == '5':
                 if input_line == '4':
                     tmp = PublicationFromFile()
